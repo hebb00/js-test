@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include partials/head %>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/formstyle.css">
+    </head>
+    <body>
+    <form id="product-form" action="/form" method="POST">
+        <h1>new product</h1>
+        <div class="tab">
+            product info:
+            <p><input class="product" name="productname" type="text" placeholder="productName.." oninput="this.className = ''"></p>
+            <p><input class="description"name="description" type="text" placeholder="description.." oninput="this.className = ''" ></p>
+        </div>
+        <div class="tab">
+            <p><input class="price" name="price" type="text" placeholder="price.." oninput="this.className = ''"></p>
+            <p><input class="category" name="category" type="text" placeholder="category.." oninput="this.className = ''"></p>
+        </div>
+        <div class="tab">
+            product picture:
+            <label for="img">Select image:</label>
+            <input type="file" id="img" name="picture" accept="image/*">
+        </div>
+        <div class="tab">
+            <p><input class="city" type="text" name="city" placeholder="city.." oninput="this.className = ''"></p>
+        </div>
+        <div style="overflow:auto;">
+            <div style="float:right;">
+              <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+              <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+          </div>
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+          </div>
+    </form>
+    <script src="/javascripts/formjs.js"></script>
+    </body>
+</html>
+
