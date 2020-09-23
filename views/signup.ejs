@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include partials/head %>
+</head>
+
+<body>
+    <%include partials/navbar %>
+    <div class="container m-5 p-5">
+        <form id="first-form" method="POST" action="/signup"  class="container w-50 ">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input name="name" type="Name" class="form-control" id="exampleInputName" aria-describedby="nameHelp">
+            <label for="exampleInputEmail1">Email address</label>
+            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label name="check" class="form-check-label" for="exampleCheck1">Check me out</label>
+          </div>
+          <button type="submit" id="log" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <% include partials/footer %>
+
+    <% include partials/script %>
+</body>
+</html>
