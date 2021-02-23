@@ -1,0 +1,21 @@
+
+html, body {
+    overflow-x: hidden;
+    height: 100%;
+}
+body {
+    background: #f2f2f2;
+    padding: 0;
+    margin: 0;
+    font-family: 'Varela Round', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+.footer{
+    background-color: #a8afb8;
+    flex-shrink: 0;
+}
+.tab-content{
+    display: flex;
+    justify-content: flex-end;
+}

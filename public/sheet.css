@@ -46,6 +46,7 @@ body {
     letter-spacing: 1.25px;
 }
 #sidebarMenu {
+    z-index: 99;
     height: 100%;
     position: fixed;
     left: 0;
@@ -221,5 +222,23 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     font-weight: bold;
     text-decoration: none;
     color: black;
+
+}
+/*------------login checkbox-------*/
+
+input[type=checkbox].form-check-input{
+    display:flex;
+  }
+
+/*-------------------*/
+
+.items{
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+.card{
+    max-width: 200%;
+
 
 }

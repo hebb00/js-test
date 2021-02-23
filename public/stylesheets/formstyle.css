@@ -8,7 +8,7 @@
   }
   
   /* Style the input fields */
-  input {
+   #in {
     padding: 10px;
     width: 100%;
     font-size: 17px;
@@ -45,5 +45,5 @@
   
   /* Mark the steps that are finished and valid: */
   .step.finish {
-    background-color: #4CAF50;
+    background-color: #3f5dfa;
   } 
