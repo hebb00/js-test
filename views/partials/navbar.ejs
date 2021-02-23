@@ -2,17 +2,26 @@
   <ul class="nav">
     <input class="input my-2" type="text" placeholder="Search..">
     <li class="nav-item">
-      <a id="btn" href="/form" class="btn btn-warning btn-bg">ADDS</a>
+      <a class="nav-link" href="/">home</a>
+    </li>
+    <% if(user){ %>
+      <li class="nav-item">
+        <a id="newproduct" href="/form" class="btn btn-warning btn-bg">add product</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/profile">profile</a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout">logout</a>
+    </li>
+    <% } else { %>
+    <li class="nav-item">
+      <a class="nav-link" href="/signup">signup</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="/login">login</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
+    <% } %>
   </ul>
 </div>
 <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
@@ -23,11 +32,11 @@
 </label>
 <div id="sidebarMenu">
   <ul class="sidebarMenuInner">
-    <li>Jelena Jovanovic <span>Web Developer</span></li>
-    <li><a href="https://vanila.io" target="_blank">Company</a></li>
-    <li><a href="https://instagram.com/plavookac" target="_blank">Instagram</a></li>
-    <li><a href="https://twitter.com/plavookac" target="_blank">Twitter</a></li>
-    <li><a href="https://www.youtube.com/channel/UCDfZM0IK6RBgud8HYGFXAJg" target="_blank">YouTube</a></li>
-    <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">Linkedin</a></li>
+    <li> CATAGORIES</li>
+    <li><a href="https://vanila.io" target="_blank">best sellers</a></li>
+    <li><a href="https://instagram.com/plavookac" target="_blank">new releases</a></li>
+    <li><a href="https://twitter.com/plavookac" target="_blank">shop by department</a></li><!--should be a dropdown list-->
+    <li><a href="https://www.youtube.com/channel/UCDfZM0IK6RBgud8HYGFXAJg" target="_blank">digital content</a></li><!--should be a dropdown list-->
+    <li><a href="https://www.linkedin.com/in/plavookac/" target="_blank">discounts</a></li>
   </ul>
 </div>
