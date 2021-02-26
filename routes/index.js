@@ -1,29 +1,62 @@
 var express = require('express');
 var router = express.Router();
-var database = require('./database')
+const { response } = require('express');
+var database = require('./database');
+var formidable = require('formidable');
+
+//requiring path and fs modules
+
+const path = require('path');
+const fs = require('fs');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'bysell',cards: ''});
+router.get('/', async function(req, res, next) 
+{
+  text = `SELECT productname,description,price FROM products`;
+  var rows = [];
+  try{
+    var {rows} = await database.query(text);
+  }catch(error){
+    console.log(error);
+  }
+  var id = rows[0].id ;
+  rows.pic_url = '/product/' + id ;
+  
+  //get the pic form products to show it in the cards
+  res.render('index', { title: 'bysell', products: rows});
 });
 
-router.post('/form', async function(req, res, next) {
+router.post('/form', function (req, res, next) {
 
-  console.log('parameters:', req.body);
+  var form = new formidable.IncomingForm();
+  form.parse(req, async function (err, fields, files) {
+    console.log(fields);
+    console.log(files,"picture should be here");
 
-  query = `INSERT INTO products (productname, description, category, price, picture, city)
-            VALUES('${req.body.productname}', '${req.body.description}', '${req.body.category}', ${req.body.price}, 
-            '${req.body.picture}', '${req.body.city}')`;
+    // TODO validate input values before saving them to the database
+    // TODO multipy currency values before saving them and divide them before you show them
+    // 10.03 * 100 = 1003
+    fields.price = fields.price * 100;
 
-  try{
-    console.log('work')
-  await database.query(query);
-  console.log('work2')
+    const query = `insert into products(productname, description, price, city,
+       category, user_id, created_at)
+      VALUES ($1, $2, $3, $4, $5,$6, current_timestamp)`;
 
-  }catch(error){
-  console.log(error);
-  }
+    try {
+      await database.query(query, [
+        fields.productname,
+        fields.description,
+        fields.price,
+        fields.city,
+        fields.category,
+        req.session.user.id,
+      ]);
+    } catch(error) {
+      console.log(error);
+    }
+    console.log('done');
 
-  res.redirect('/');
+    res.redirect('/profile')
+  });
 });
 
 router.get('/form', function(req, res, next) {
@@ -45,46 +78,58 @@ router.post('/signup', async function(req, res, next){
   const email= req.body.email;
   const password= req.body.password;
 
-  query = `INSERT INTO users (name, email, password)
-    VALUES('${name}', '${email}', '${password}')`;
-  try{
-    await database.query(query);
-  }catch(error){
-    console.log(error);
-  }
-  res.redirect('/login')
+//  if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.match(email))
+//   {
+//   }
+
+    query = `INSERT INTO users (name, email, password)
+        VALUES('${name}', '${email}', '${password}')`;
+
+    try{
+        await database.query(query);
+        result = await logIn(email,password);
+        req.session.user = result;
+        if (result) {
+            res.redirect('/profile')
+        }
+    }
+    catch(error){
+        console.log(error);
+    }
+
+    res.redirect('/login');
 });
 
 router.get('/login', function(req, res, next){
-
-
   res.render('login', {pageName:'',})
 });
+
+async function logIn(email, password){
+  
+  text = `SELECT name,id FROM users WHERE
+   email = '${email}'AND password = '${password}'`;
+  rows =[];
+  try{
+    var {rows, rowCount} =  await database.query(text);
+    if ( rowCount == 0 ){
+        return null;
+    }
+  }catch(error){
+    console.log(error);
+  }
+  return rows[0];
+}
 
 router.post('/login',async function(req, res, next){
 
   const check = req.body.check;
-  
-  text = `SELECT name,id FROM users WHERE
-   email = '${req.body.email}'AND password = '${req.body.password}'`;
-  rows =[];
-   try{
-    var {rows, rowCount} = await database.query(text);
-    if ( rowCount == 0 ){
-      res.redirect('/login');
-      return;
-    }
-   }catch(error){
-    console.log(error);
-   }
-   console.log(rows);
-   req.session.user = rows[0];
-   console.log(req.session.user);
-
-   if (check) {
-    res.cookie('user', req.session.user);
+  result = await logIn(req.body.email,req.body.password);
+  req.session.user = result;
+  if (result){
+    if (check) {
+        res.cookie('user', req.session.user);
+      }
   }
-
    res.redirect('/profile');
 });
 
@@ -97,10 +142,32 @@ router.get('/logout', function(req, res, next){
 
   res.render('logout', {pageName:'',})
 });
-router.get('/profile', function(req, res, next){
+
+router.get('/profile', async function(req, res, next){
+  if(req.session.user){
+    qqq = "SELECT productname,description,price FROM products WHERE user_id =" + req.session.user.id;
+    rows = [];
+    console.log(req.session.user.id);
+    try{
+      var {rows} = await database.query(qqq); 
+      // TODO check if this works and understand it
+      rows.price = rows.price / 100;
+      console.log(rows);
+
+    } catch(error){
+      console.log(error);
+    }
+    console.log(rows[0]);
+
+  }
 
 
-  res.render('profile', {pageName:'profile',})
+  res.render('profile', {pageName:'profile',products:rows})
 });
 
+router.get('/product', function(req, res, next){
+
+
+  res.render('product', {pageName:'',})
+});
 module.exports = router;
