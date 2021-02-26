@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include partials/head %>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/profile.css">
+
+</head>
+
+<body>
+    <% include partials/navbar %>
+
+
+
+    <!-- Nav tabs -->
+<ul class="nav nav-tabs m-5">
+    <li class="nav-item">
+      <a class="nav-link active"  style="color:black;" data-toggle="tab" href="#wishlist">wishlist</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="color:black;"  data-toggle="tab" href="#myprod">myproducts</a>
+    </li>
+  </ul>
+    <div class="tab-pane container fade" id="myprod">
+        <div class="row text-center text-lg-left">
+            <% for(i=0; i < products.length; i++) {%>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="bs-example">
+                    <div class="card" style="max-width: 300px;">
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <img src="/images/dress.jpg"class="card-img-top h-100" alt="...">
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= products[i].productname %></h5>
+                                    <p class="card-text"><%= products[i].description %>.</p>
+                                    <a href="#" class="btn btn-primary stretched-link">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <div class="tab-pane container fade" id="wishlist">...</div>
+  </div>
+    <% include partials/footer %>
+
+</body>
+
+</html>

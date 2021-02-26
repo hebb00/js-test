@@ -12,30 +12,65 @@
     <div id="content">
       <ul class="nav nav-2">
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">clothes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li onclick="shoes()" " class=" nav-item">
+          <a class="nav-link" href="#">shoes</a>
+          <img id='shoe' style="display: none;" src='/images/BingWallpaper.jpg'>
         </li>
-      </ul> 
-  <!--   <div class="items">
-      <% for(i = 0; i < cards.length; i++){ %>
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+      </ul>
+
+      <div class="gallery container no-gutters mx-auto">
+        <!--row adds some margin and this removes it n no gutters class="mx-auto" puts margin to auto n center the thumpnails margin: 0 auto;-->
+        <div class="row text-center ">
+          <div class="item">
+            <% for(i=0; i < products.length; i++) {%>
+            <div style =" display: inline-block;margin: 20px;" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+             <div class="items ">
+              <div id="card-title" class="card ">
+                <img class="card-img-top" src="/images/dress.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 onmouseover="x()" class="card-title"><%= products[i].productname %></h5>
+                  <p class="card-text"><%= products[i].description %></p>
+                  <a href="/product" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
           </div>
+          <% } %>
         </div>
-      <% } %>
-      </div>--> 
+      </div>
     </div>
+    <div class="row text-center text-lg-left">
+      <% for(i=0; i < products.length; i++) {%>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div class="bs-example">
+              <div class="card" style="max-width: 300px;">
+                  <div class="row no-gutters">
+                      <div class="col-sm-5">
+                          <img src="/images/dress.jpg"class="card-img-top h-100" alt="...">
+                      </div>
+                      <div class="col-sm-7">
+                          <div class="card-body">
+                              <h5 class="card-title"><%= products[i].productname %></h5>
+                              <p class="card-text"><%= products[i].description %>.</p>
+                              <a href="#" class="btn btn-primary stretched-link">View Profile</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <% } %>
   </div>
-    <% include partials/footer%>
+  </div>
+  </div>
+
+  </div>
+  <% include partials/footer%>
 </body>
 
 </html>
