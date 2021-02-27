@@ -78,9 +78,6 @@ router.post('/signup', async function(req, res, next){
   const email= req.body.email;
   const password= req.body.password;
 
-//  if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.match(email))
-//   {
-//   }
 
     query = `INSERT INTO users (name, email, password)
         VALUES('${name}', '${email}', '${password}')`;
@@ -101,7 +98,13 @@ router.post('/signup', async function(req, res, next){
 });
 
 router.get('/login', function(req, res, next){
-  res.render('login', {pageName:'',})
+  invalid = req.query.invalid;
+
+  if(invalid) {
+    var msg = "invalid email or password";
+  }
+
+  res.render('login', {pageName:'', msg: msg})
 });
 
 async function logIn(email, password){
@@ -129,6 +132,9 @@ router.post('/login',async function(req, res, next){
     if (check) {
         res.cookie('user', req.session.user);
       }
+  }
+  else{
+    res.redirect('/login?invalid=1');
   }
    res.redirect('/profile');
 });
