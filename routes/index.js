@@ -3,11 +3,13 @@ var router = express.Router();
 const { response } = require('express');
 var database = require('./database');
 var formidable = require('formidable');
+var bcrypt = require('bcrypt');
 
 //requiring path and fs modules
 
 const path = require('path');
 const fs = require('fs');
+const { verify } = require('crypto');
 /* GET home page. */
 router.get('/', async function(req, res, next) 
 {
@@ -80,14 +82,14 @@ router.post('/signup', async function(req, res, next){
   const name = req.body.name;
   const email= req.body.email;
   const password= req.body.password;
-
-
+  console.log(password);
+   const hashedPass = bcrypt.hashSync(password,10);
     query = `INSERT INTO users (name, email, password)
-        VALUES('${name}', '${email}', '${password}')`;
-
+    VALUES('${name}', '${email}', '${hashedPass}')`;
     try{
         await database.query(query);
-        result = await logIn(email,password);
+        console.log(hashedPass);
+        result = await logIn(req.body);
         req.session.user = result;
         if (result) {
             res.redirect('/profile')
@@ -110,26 +112,33 @@ router.get('/login', function(req, res, next){
   res.render('login', {pageName:'', msg: msg})
 });
 
-async function logIn(email, password){
-  
-  text = `SELECT name,id FROM users WHERE
-   email = '${email}'AND password = '${password}'`;
+async function logIn(body){
+  var email=body.email
+  text = `SELECT name,id, password FROM users WHERE
+   email = '${email}'`;
   rows =[];
   try{
     var {rows, rowCount} =  await database.query(text);
     if ( rowCount == 0 ){
         return null;
     }
+    var verified = bcrypt.compareSync(body.password, rows[0]["password"]);
+    console.log(verified);
   }catch(error){
     console.log(error);
   }
+  if(verified){
   return rows[0];
+}
+  else{
+    return null;
+  }
 }
 
 router.post('/login',async function(req, res, next){
-
   const check = req.body.check;
-  result = await logIn(req.body.email,req.body.password);
+  result = await logIn(req.body);
+
   req.session.user = result;
   if (result){
     if (check) {
