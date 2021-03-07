@@ -60,6 +60,9 @@ router.post('/form', function (req, res, next) {
 });
 
 router.get('/form', function(req, res, next) {
+  if(!req.session.user){
+    res.redirect('/login');
+  }
   
   res.render('form', { title: 'bysell',});
 });
@@ -165,8 +168,9 @@ router.get('/profile', async function(req, res, next){
     }
     console.log(rows[0]);
 
+  }else{
+    res.redirect('/login')
   }
-
 
   res.render('profile', {pageName:'profile',products:rows})
 });
