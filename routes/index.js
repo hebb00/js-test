@@ -100,6 +100,9 @@ router.post('/signup', async function(req, res, next){
     }
 
     res.redirect('/login');
+    
+
+   
 });
 
 router.get('/login', function(req, res, next){
@@ -128,8 +131,8 @@ async function logIn(body){
     console.log(error);
   }
   if(verified){
-  return rows[0];
-}
+    return rows[0];
+  }
   else{
     return null;
   }
@@ -185,8 +188,6 @@ router.get('/profile', async function(req, res, next){
 });
 
 router.get('/product', function(req, res, next){
-
-
   res.render('product', {pageName:'',})
 });
 module.exports = router;
