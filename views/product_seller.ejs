@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/head %>
+</head>
+<body>
+  <%include partials/navbar %>
+    <form class="m-5" id="product-form" action="/product_seller/<%= products.id %>" enctype="multipart/form-data"
+      method="POST">
+      <h1 class="m-5">EDIT product</h1>
+      <div>
+        product
+        <p> <input class="product" name="productname" type="text" value="<%=products.productname %>"></p>
+      </div>
+      <div>
+        description
+        <p>
+          <input class="description" name="description" type="text" value="<%= products.description %>">
+        </p>
+      </div>
+      <div>
+        <p>
+          price<br>
+          <input class="price" name="price" type="text" value="<%=products.price %>">
+        </p>
+      </div>
+      <div>
+        <p>
+          catagory
+          <br>
+          <input class="category" name="category" type="text" value="<%=products.catagory %>">
+        </p>
+      </div>
+      <div>
+        <p>
+          city<br>
+          <input class="city" type="text" name="city" value="<%=products.city %>">
+        </p>
+      </div>
+      <div>
+        <button class="btn btn-warning btn-bg" type="submit">EDIT</button>
+        <button class="btn btn-warning btn-bg">DELETE</button>
+      </div>
+    </form>
+    <% include partials/footer %>
+
+      <script src="/javascripts/formjs.js"></script>
+</body>
+
+</html>
