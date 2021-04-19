@@ -203,7 +203,9 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 }
 /*------------navbar 2-------*/
 .nav-2{
-    margin-top: 60px;
+    display:flex;
+    margin-top:20px;
+    margin-bottom:60px;
     height: 150px;
     justify-content: center;
 
@@ -211,11 +213,16 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 .nav-2 li{
     height: 150px;
     width: 150px;
-    background-color: #a8afb8;
+    background-position: center;
+    background-size: cover;
     margin: 30px;
     text-align: center;
     cursor: pointer;
 
+
+}
+.nav-2 li second{
+    background-image: url(images/c.jpeg);
 
 }
 .nav-2 li a{
@@ -230,15 +237,23 @@ input[type=checkbox].form-check-input{
     display:flex;
   }
 
-/*-------------------*/
 
-.items{
-    margin-top: 30px;
+
+/*-----card----*/
+.bs-example{
     display: flex;
-    justify-content: flex-end;
+
 }
 .card{
-    max-width: 200%;
+    flex-grow:2;
+    margin-bottom:30px ;
 
-
+}
+.card img{
+    height: 180px;
+    width: 130px;
+}
+.items{
+    margin-top: 0 ;
+    margin-bottom: 30px;
 }

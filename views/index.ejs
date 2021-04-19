@@ -2,71 +2,120 @@
 <html>
 
 <head>
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
   <% include partials/head %>
 </head>
 
 <body>
   <div class="wrapper">
     <% include partials/navbar %>
-    <div id="content">
-      <ul class="nav nav-2">
-        <li class="nav-item">
-          <a class="nav-link" href="#">books</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">clothes</a>
-        </li>
-        <li onclick="shoes()" " class=" nav-item">
-          <a class="nav-link" href="#">shoes</a>
-          <img id='shoe' style="display: none;" src='/images/BingWallpaper.jpg'>
-        </li>
-      </ul>
+      <div id="content">
+        <div id="demo" class="carousel slide" data-ride="carousel">
+          <ul class="carousel-indicators">
+            <li data-target="#theCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#theCarousel" data-slide-to="1"></li>
+            <li data-target="#theCarousel" data-slide-to="2"></li>
+          </ul>
+          <div class="carousel-inner" style="height: 400px;">
+            <div class="carousel-item active" style="height: 400px; background-position: center;background-size: cover;
+         background-image: url('images/g.jpg');">
+              <div class="carousel-caption ml-auto mr-auto">
+                <p><a href="#" id='mybtn' class="btn btn-primary btn-sm">get now</a></p>
+              </div>
+            </div>
+            <div class="carousel-item"
+              style="height: 400px;  background-position: center;background-size: cover; background-image: url('images/shoppin.jpg');">
 
-      <div class="gallery container no-gutters mx-auto">
-        <!--row adds some margin and this removes it n no gutters class="mx-auto" puts margin to auto n center the thumpnails margin: 0 auto;-->
-        <div class="row text-center ">
-          <div class="item">
-            <% for(i=0; i < products.length; i++) {%>
-            <div style =" display: inline-block;margin: 20px;" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-             <div class="items ">
-              <div id="card-title" class="card ">
-                <img class="card-img-top" src="/images/dress.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 onmouseover="x()" class="card-title"><%= products[i].productname %></h5>
-                  <p class="card-text"><%= products[i].description %></p>
-                  <a href="/product" class="btn btn-primary">Go somewhere</a>
-                </div>
+            </div>
+            <div class="carousel-item" style="height: 400px;  background-position: center;background-size: cover;
+         background-image: url('images/shop.jpg');">
+              <div class="carousel-caption ml-auto mr-auto">
+                <p><a href="#" class="btn btn-primary btn-sm">articles</a></p>
               </div>
             </div>
           </div>
-          <% } %>
+          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
+        <div class="gallery container no-gutters mx-auto">
+          <!--row adds some margin and this removes it n no gutters class="mx-auto" puts margin to auto n center the thumpnails margin: 0 auto;-->
+
+          <!-- </div> -->
+          <ul class="nav nav-2">
+            <li class="nav-item" style="  background-image: url(images/b.jpg);">
+              <a class="nav-link" href="#">books </a>
+            </li>
+            <li class="nav-item " style="  background-image: url(images/c.jpeg);">
+              <a class="nav-link" href="#">clothes</a>
+            </li>
+            <li class=" nav-item" style="  background-image: url(images/h.jpeg);" > 
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item" style="  background-image: url(images/m.jpeg);">
+              <a class="nav-link" href="#">Makeup</a>
+            </li>
+            <li class="nav-item" style="  background-image: url(images/car.jpeg);">
+              <a class="nav-link" href="/cars">Cars</a>
+            </li>
+          </ul>
+          <div class="row text-center text-lg-left">
+            <div class="col-9">
+              <% for(i=0; i < products.length; i++) {%>
+                <div class="col-lg-12">
+                  <div class="bs-example">
+                    <div class="card">
+                      <div class="row no-gutters">
+                        <div class="col-sm-3">
+                          <img src="/images/dress.jpg" class="card-img-top" alt="...">
+                        </div>
+                        <div class="col-sm-7">
+                          <div class="card-body">
+                            <h5 class="card-title">
+                              <%= products[i].productname %>
+                            </h5>
+                            <p class="card-text">
+                              <%= products[i].description %>.
+                            </p>
+                            <a href="/product" class="btn btn-primary stretched-link">View Profile</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+            </div>
+            <div class="col-lg-3">
+              <div class="row no-gutters text-center">
+                <% for(i=0; i < products.length; i++) {%>
+                  <div class="col-lg-12">
+                    <div class="items ">
+                      <div id="card-title" class="card ">
+                        <img class="card-img-top" src="/images/dress.jpg" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title">
+                            <%= products[i].productname %>
+                          </h5>
+                          <p class="card-text">
+                            <%= products[i].description %>
+                          </p>
+                          <a href="/product" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% } %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row text-center text-lg-left">
-      <% for(i=0; i < products.length; i++) {%>
-      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <div class="bs-example">
-              <div class="card" style="max-width: 300px;">
-                  <div class="row no-gutters">
-                      <div class="col-sm-5">
-                          <img src="/images/dress.jpg"class="card-img-top h-100" alt="...">
-                      </div>
-                      <div class="col-sm-7">
-                          <div class="card-body">
-                              <h5 class="card-title"><%= products[i].productname %></h5>
-                              <p class="card-text"><%= products[i].description %>.</p>
-                              <a href="#" class="btn btn-primary stretched-link">View Profile</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <% } %>
-  </div>
-  </div>
   </div>
 
   </div>

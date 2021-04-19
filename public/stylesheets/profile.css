@@ -19,3 +19,21 @@ body {
     display: flex;
     justify-content: flex-end;
 }
+/*-----card----*/
+.bs-example{
+    display: flex;
+
+}
+.card{
+    flex-grow:2;
+    margin-bottom:30px ;
+
+}
+.card img{
+    height: 180px;
+    width: 130px;
+}
+.items{
+    margin-top: 0 ;
+    margin-bottom: 30px;
+}
